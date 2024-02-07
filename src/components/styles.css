@@ -61,11 +61,11 @@
   background-color: rgb(50, 195, 205);
 }
 
-.dragactive {
+.drag__active {
   background-color: rgb(0, 221, 236);
 }
 
-.dragcomplete {
+.drag__complete {
   background-color: rgb(255, 38, 0);
 }
 
