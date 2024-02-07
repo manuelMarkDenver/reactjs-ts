@@ -52,15 +52,20 @@ const SingleTodo: React.FC<SingleTodoProps> = ({
     inputRef && inputRef.current && inputRef.current.focus();
   }, [edit]);
 
+  const handleCancel = () => {
+    setEdit(false);
+    setEditTodo(todo.todo);
+  };
+
   return (
     <Draggable draggableId={todo.id.toString()} index={index}>
       {(provided, snapshot) => (
         <form
           className={`todos__single ${snapshot.isDragging ? "drag" : ""}`}
           onSubmit={(e) => handleEdit(e, todo.id)}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
+          ref={edit ? null : provided.innerRef}
+          {...(edit ? {} : provided.draggableProps)}
+          {...(edit ? {} : provided.dragHandleProps)}
         >
           {edit ? (
             <input
@@ -74,24 +79,35 @@ const SingleTodo: React.FC<SingleTodoProps> = ({
           ) : (
             <span className="todos__single--text">{todo.todo}</span>
           )}
-
           <div>
-            <span
-              className="icon"
-              onClick={() => {
-                if (!edit && !todo.isDone) {
-                  setEdit(!edit);
-                }
-              }}
-            >
-              <AiFillEdit />
-            </span>
-            <span className="icon" onClick={() => handleDelete(todo.id)}>
-              <AiFillDelete />
-            </span>
-            <span className="icon" onClick={() => handleDone(todo.id)}>
-              <MdDone />
-            </span>
+            {!edit ? (
+              <>
+                <span
+                  className="icon"
+                  onClick={() => {
+                    if (!edit && !todo.isDone) {
+                      setEdit(!edit);
+                    }
+                  }}
+                >
+                  <AiFillEdit />
+                </span>
+                <span className="icon" onClick={() => handleDelete(todo.id)}>
+                  <AiFillDelete />
+                </span>
+                <span className="icon" onClick={() => handleDone(todo.id)}>
+                  <MdDone />
+                </span>
+              </>
+            ) : (
+              <button
+                type="button"
+                className="input__cancel"
+                onClick={() => handleCancel()}
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </form>
       )}

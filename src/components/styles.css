@@ -44,6 +44,28 @@
   box-shadow: 0 0 5px black;
 }
 
+.input__cancel {
+  padding: 6px 8px;
+  margin: 12px;
+  border-radius: 4px;
+  right: 0px;
+  border: none;
+  font-size: 15px;
+  background-color: #2f74c0;
+  color: white;
+  transition: 0.2s all;
+  box-shadow: 0 0 5px black;
+}
+
+.input__cancel:hover {
+  background-color: #388ae2;
+}
+
+.input__cancel:active {
+  transform: scale(0.8);
+  box-shadow: 0 0 5px black;
+}
+
 .container {
   width: 95%;
   display: flex;
